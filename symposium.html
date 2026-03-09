@@ -134,20 +134,44 @@
 <!-- WAITLIST -->
 <section id="waitlist" class="py-20 bg-gradient-to-b from-transparent via-symposium-blue/10 to-transparent">
     <div class="max-w-md mx-auto px-6 text-center">
-        <h2 class="text-4xl font-semibold mb-6">Be among the first</h2>
-        <p class="text-gray-400 mb-8">Early access to the full platform + Founder’s Pass pricing when we launch on Product Hunt.</p>
+        <h2 class="text-4xl font-semibold mb-4">Be among the first</h2>
+        <p class="text-gray-400 mb-8">Early access to the full platform + Founder's Pass pricing when we launch on Product Hunt.</p>
         
-<!-- Google Form Waitlist -->
-<iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSetTXwrvUBZTvqpW9fXb3oigCTw4NoxU2Kq4n7pqbkpX9iaDQ/viewform?embedded=true" 
-    width="100%" 
-    height="520" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0"
-    style="background: transparent; border-radius: 16px;">
-    Loading…
-</iframe>
+        <form 
+            id="waitlist-form"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSetTXwrvUBZTvqpW9fXb3oigCTw4NoxU2Kq4n7pqbkpX9iaDQ/formResponse"
+            method="POST"
+            target="hidden_iframe"
+            onsubmit="handleWaitlist()"
+        >
+            <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                <input 
+                    type="email" 
+                    name="entry.386660604"
+                    required
+                    placeholder="Enter your email"
+                    class="flex-1 px-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00D4FF]/50 focus:ring-1 focus:ring-[#00D4FF]/30 transition-all text-base"
+                >
+                <button 
+                    type="submit"
+                    id="waitlist-btn"
+                    class="px-8 py-3.5 rounded-xl font-semibold text-white text-base transition-all duration-300"
+                    style="background: linear-gradient(135deg, #00D4FF 0%, #8B5CF6 100%);"
+                    onmouseover="this.style.opacity='0.85'" 
+                    onmouseout="this.style.opacity='1'"
+                >
+                    Join Waitlist
+                </button>
+            </div>
+        </form>
+
+        <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+        <p id="waitlist-success" class="hidden text-[#00D4FF] font-medium mt-2 text-sm">
+            ✓ You're on the list. We'll notify you at launch.
+        </p>
+
+        <p class="text-gray-600 text-xs mt-3">No spam. Just a launch notification on March 25.</p>
 
         <p class="mt-8 text-gray-400">
             For information contact: 
@@ -157,6 +181,15 @@
         </p>
     </div>
 </section>
+
+<script>
+function handleWaitlist() {
+    setTimeout(function() {
+        document.getElementById('waitlist-form').style.display = 'none';
+        document.getElementById('waitlist-success').classList.remove('hidden');
+    }, 500);
+}
+</script>
 
     <!-- FOOTER -->
     <footer class="py-12 border-t border-white/10">
