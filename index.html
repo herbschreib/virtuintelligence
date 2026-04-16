@@ -3,93 +3,869 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VirtuIntelligence — Holding Company</title>
-  <meta name="description" content="VirtuIntelligence is a subsidiary of HumanSide Technologies, serving as the strategic holding company for AI collaboration, knowledge preservation, and human-centered innovation."/>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>VirtuIntelligence — Keepers of Intelligence</title>
+  <meta name="description" content="VirtuIntelligence is the EU subsidiary of HumanSide Technologies, holding company for multi-AI deliberation, knowledge preservation, and long-horizon research. Symposium. The Ember. The Discoveries Series."/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Lora:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --bg-deep: #0D0B08;
+      --bg-paper: #141109;
+      --bg-card: #1A160E;
+      --hairline: #2A2520;
+      --hairline-warm: #3A3024;
+      --ochre: #8B6914;
+      --amber: #C3AF87;
+      --amber-bright: #D9C49D;
+      --ivory: #EDE4D3;
+      --ivory-dim: #C7BDA9;
+      --muted: #8A8070;
+      --muted-dim: #5A5348;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0a0a0a;
-      color: #e0e0e0;
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg-deep);
+      color: var(--ivory);
+      line-height: 1.65;
+      font-weight: 400;
+      overflow-x: hidden;
+      font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
     }
-    .hero-bg {
-      background: radial-gradient(circle at center, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+
+    /* Paper grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(139, 105, 20, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(195, 175, 135, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
     }
-    .logo-glow {
-      filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.6));
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 2;
+      mix-blend-mode: overlay;
     }
-    .brand-card {
-      transition: all 0.4s ease;
+
+    .container {
+      position: relative;
+      z-index: 3;
     }
-    .brand-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 25px 50px -12px rgba(0, 212, 255, 0.25);
+
+    /* Typography */
+    .display {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(13, 11, 8, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .nav-brand {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 14, "WONK" 0;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ivory);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      color: var(--amber);
+    }
+
+    .nav-parent {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-parent:hover {
+      color: var(--amber);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding: 8rem 3rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+      color: var(--amber);
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 2rem;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .hero-title {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      margin-bottom: 2rem;
+      color: var(--ivory);
+    }
+
+    .hero-title .emphasis {
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--amber);
+    }
+
+    .hero-subtitle {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 48, "SOFT" 0;
+      font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ivory-dim);
+      max-width: 48rem;
+      line-height: 1.4;
+      margin-bottom: 3rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding-top: 2rem;
+      border-top: 1px solid var(--hairline);
+      max-width: 48rem;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .hero-meta-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-meta-value {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 14;
+      font-size: 1rem;
+      color: var(--ivory);
+      font-weight: 500;
+    }
+
+    /* MANIFESTO */
+    .manifesto {
+      padding: 8rem 3rem;
+      border-top: 1px solid var(--hairline);
+      position: relative;
+    }
+
+    .manifesto-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .manifesto-label {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .manifesto-text {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 48;
+      font-size: clamp(1.35rem, 2.3vw, 1.75rem);
+      font-weight: 300;
+      line-height: 1.45;
+      color: var(--ivory);
+    }
+
+    .manifesto-text p {
+      margin-bottom: 2rem;
+    }
+
+    .manifesto-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .manifesto-text em {
+      font-style: italic;
+      color: var(--amber);
+      font-variation-settings: "opsz" 48, "SOFT" 100, "WONK" 1;
+    }
+
+    .drop-cap {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+      font-weight: 300;
+      font-size: 5.5rem;
+      line-height: 0.85;
+      float: left;
+      padding: 0.35rem 0.7rem 0 0;
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    /* PORTFOLIO */
+    .portfolio {
+      padding: 8rem 3rem;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .portfolio-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 144, "SOFT" 0;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--ivory);
+      line-height: 1;
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+      color: var(--amber);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--hairline);
+      border: 1px solid var(--hairline);
+    }
+
+    .portfolio-item {
+      background: var(--bg-paper);
+      padding: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      transition: background 0.4s ease;
+      position: relative;
+    }
+
+    .portfolio-item:hover {
+      background: var(--bg-card);
+    }
+
+    .portfolio-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--amber);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+
+    .portfolio-item:hover::before {
+      transform: scaleY(1);
+    }
+
+    .portfolio-index {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 144, "WONK" 0;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--ochre);
+      line-height: 1;
+    }
+
+    .portfolio-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .portfolio-name {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 144, "SOFT" 0;
+      font-size: 2.25rem;
+      font-weight: 400;
+      color: var(--ivory);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .portfolio-category {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .portfolio-description {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--ivory-dim);
+      max-width: 38rem;
+    }
+
+    .portfolio-description em {
+      color: var(--amber);
+      font-style: italic;
+    }
+
+    .portfolio-action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+      justify-self: end;
+    }
+
+    .portfolio-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      border: 1px solid var(--hairline-warm);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .portfolio-link:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+      background: rgba(195, 175, 135, 0.05);
+    }
+
+    .portfolio-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .status-active { background: #7FB069; box-shadow: 0 0 8px rgba(127, 176, 105, 0.5); }
+    .status-published { background: var(--amber); box-shadow: 0 0 8px rgba(195, 175, 135, 0.5); }
+    .status-ongoing { background: var(--ochre); }
+
+    /* LINEAGE */
+    .lineage {
+      padding: 8rem 3rem;
+      border-top: 1px solid var(--hairline);
+      background: var(--bg-paper);
+    }
+
+    .lineage-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .lineage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-top: 4rem;
+    }
+
+    .lineage-block h3 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 48;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .lineage-block p {
+      color: var(--ivory-dim);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .lineage-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .lineage-block a {
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid var(--hairline-warm);
+      transition: border-color 0.3s ease;
+    }
+
+    .lineage-block a:hover {
+      border-color: var(--amber);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 4rem 3rem 3rem;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .footer-brand {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 48;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 24, "SOFT" 100, "WONK" 1;
+      font-style: italic;
+      color: var(--amber);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .footer-links a {
+      color: var(--ivory-dim);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--amber);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 3rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer-bottom a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--amber);
+    }
+
+    /* Load animations */
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .reveal {
+      animation: reveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .reveal-1 { animation-delay: 0.1s; }
+    .reveal-2 { animation-delay: 0.3s; }
+    .reveal-3 { animation-delay: 0.5s; }
+    .reveal-4 { animation-delay: 0.7s; }
+    .reveal-5 { animation-delay: 0.9s; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .manifesto, .portfolio, .lineage { padding: 5rem 1.5rem; }
+      footer { padding: 3rem 1.5rem 2rem; }
+      
+      .manifesto-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .manifesto-label { position: static; }
+      
+      .portfolio-item { 
+        grid-template-columns: 1fr; 
+        gap: 1.5rem; 
+        padding: 2.5rem;
+      }
+      .portfolio-action { align-items: flex-start; justify-self: start; }
+      
+      .lineage-grid { grid-template-columns: 1fr; gap: 3rem; }
+      
+      .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+
+      .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      
+      .hero-meta { gap: 2rem; }
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
+  <div class="container">
+    
+    <!-- NAVIGATION -->
+    <nav>
+      <a href="/" class="nav-brand">Virtu<span>Intelligence</span></a>
+      <a href="https://humansidetechnologies.com" class="nav-parent" target="_blank">HumanSide Technologies ↗</a>
+    </nav>
 
-  <!-- Header -->
-  <header class="pt-16 pb-12 hero-bg text-center">
-    <div class="max-w-4xl mx-auto px-6">
-      <img src="https://virtuintelligence.com/logo-virtuintelligence.png" 
-           alt="VirtuIntelligence" 
-           class="logo-glow mx-auto h-28 mb-8">
-      
-      <h1 class="text-5xl md:text-6xl font-bold tracking-tight text-white mb-4">
-        VirtuIntelligence
-      </h1>
-      <p class="text-xl text-cyan-400 font-light mb-8">
-        Advancing intelligence through knowledge, collaboration, and resilience
-      </p>
-      <p class="max-w-2xl mx-auto text-lg text-gray-400">
-        A subsidiary of HumanSide Technologies.<br>
-        Strategic holding company for AI collaboration platforms, knowledge preservation, and human-centered innovation.
-      </p>
-    </div>
-  </header>
-
-  <!-- Brands Section -->
-  <section class="py-20 bg-black/60 flex-1">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-label mono reveal reveal-1">
+          EU SUBSIDIARY · HOLDING COMPANY · EST. 2025
+        </div>
         
-        <!-- Symposium -->
-        <div class="brand-card bg-zinc-900 border border-cyan-500/20 rounded-3xl p-10 hover:border-cyan-400">
-          <h3 class="text-3xl font-semibold text-cyan-400 mb-4">Symposium</h3>
-          <p class="text-gray-300 text-lg mb-8">
-            Multi-AI collaboration platform. Real-time deliberation with humans and frontier models in one shared room.
-          </p>
-          <a href="https://www.theaisymposium.net" 
-             target="_blank"
-             class="inline-flex items-center text-cyan-400 hover:text-cyan-300 font-medium">
-            Visit Symposium →
-          </a>
-        </div>
+        <h1 class="display hero-title reveal reveal-2">
+          Keepers of<br>
+          <span class="emphasis">intelligence.</span>
+        </h1>
+        
+        <p class="hero-subtitle reveal reveal-3">
+          From the old Italian <em style="color:var(--amber)">virtù</em> — excellence through skill, 
+          judgment, and the courage to act rightly. We build platforms for deliberation, 
+          preserve the knowledge civilizations encoded in stone, and work in the tradition 
+          of those who understood that the warm times don't last.
+        </p>
 
-        <!-- The Ember -->
-        <div class="brand-card bg-zinc-900 border border-cyan-500/20 rounded-3xl p-10 hover:border-cyan-400">
-          <h3 class="text-3xl font-semibold text-cyan-400 mb-4">The Ember</h3>
-          <p class="text-gray-300 text-lg mb-8">
-            A living trilogy exploring how ancient civilizations encoded knowledge to survive collapse — from Paleolithic symbols to Göbekli Tepe and beyond.
-          </p>
-          <a href="https://theemberbook.com" 
-             target="_blank"
-             class="inline-flex items-center text-cyan-400 hover:text-cyan-300 font-medium">
-            Visit The Ember →
-          </a>
+        <div class="hero-meta reveal reveal-4">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Domicile</span>
+            <span class="hero-meta-value">Porto, Portugal</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Parent</span>
+            <span class="hero-meta-value">HumanSide Technologies LLC</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Practice</span>
+            <span class="hero-meta-value">AI Deliberation · Knowledge Preservation</span>
+          </div>
         </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="py-12 border-t border-white/10 text-center text-gray-500 text-sm">
-    <div class="max-w-4xl mx-auto px-6">
-      © 2026 VirtuIntelligence — A <a href="https://humansidetechnologies.com" class="hover:text-white">HumanSide Technologies</a> Company
-    </div>
-  </footer>
+    <!-- MANIFESTO -->
+    <section class="manifesto">
+      <div class="manifesto-inner">
+        <div class="manifesto-label">
+          <span class="mono" style="color: var(--amber);">§ 01 — POSITION</span>
+        </div>
+        <div class="manifesto-text">
+          <p>
+            <span class="drop-cap">T</span>he Natufians encoded survival knowledge into the pillars at 
+            Göbekli Tepe eleven thousand years ago. They understood that civilizations collapse, 
+            that memory dies with people, and that <em>what matters must be carved into something 
+            that outlasts the carver.</em>
+          </p>
+          <p>
+            We work in that lineage. Not as archaeologists of the past, but as practitioners for 
+            the present — building tools that help humans and artificial intelligences think 
+            together with rigor, and telling the stories that make the keeper's work legible to 
+            a generation that has forgotten why the stones matter.
+          </p>
+          <p>
+            Intelligence, properly understood, is not computation. It is <em>judgment under 
+            uncertainty</em>, the discipline of knowing what you know and what you do not, 
+            and the patience to distinguish the warm times from the cold.
+          </p>
+        </div>
+      </div>
+    </section>
 
+    <!-- PORTFOLIO -->
+    <section class="portfolio">
+      <div class="portfolio-inner">
+        <div class="section-header">
+          <h2 class="section-title">The <em>portfolio.</em></h2>
+          <span class="mono" style="color: var(--muted);">§ 02 — HOLDINGS</span>
+        </div>
+
+        <div class="portfolio-grid">
+          
+          <div class="portfolio-item">
+            <div class="portfolio-index">01</div>
+            <div class="portfolio-content">
+              <span class="portfolio-category">AI Deliberation Platform</span>
+              <h3 class="portfolio-name">Symposium</h3>
+              <p class="portfolio-description">
+                Multi-AI deliberation in a shared room. Claude, Grok, Mistral, Phi-4 and user-brought models 
+                engage with humans in real time — with <em>epistemic rigor built into the architecture</em>, 
+                not bolted on after the fact. The Collaborative Intelligence Layer (CIL) provides confidence 
+                ratings, source attribution, and claim separation as platform features rather than prompt tricks.
+              </p>
+            </div>
+            <div class="portfolio-action">
+              <a href="https://www.theaisymposium.net" target="_blank" class="portfolio-link">Enter Symposium →</a>
+              <span class="portfolio-status"><span class="status-dot status-active"></span>Active · Live</span>
+            </div>
+          </div>
+
+          <div class="portfolio-item">
+            <div class="portfolio-index">02</div>
+            <div class="portfolio-content">
+              <span class="portfolio-category">Literary Trilogy</span>
+              <h3 class="portfolio-name">The Ember</h3>
+              <p class="portfolio-description">
+                A three-book arc grounded in the thesis that Neolithic keepers deliberately encoded critical 
+                survival knowledge in stone to carry it through civilizational collapse. <em>The First Keepers</em>, 
+                <em>The Ember</em>, and <em>The Aperture</em> trace that inheritance from Paleolithic symbol 
+                through Göbekli Tepe and Stonehenge into our own time — where the infrastructure of 
+                knowledge transmission grows fragile again.
+              </p>
+            </div>
+            <div class="portfolio-action">
+              <a href="https://theemberbook.com" target="_blank" class="portfolio-link">Visit The Ember →</a>
+              <span class="portfolio-status"><span class="status-dot status-published"></span>Book II · Published</span>
+            </div>
+          </div>
+
+          <div class="portfolio-item">
+            <div class="portfolio-index">03</div>
+            <div class="portfolio-content">
+              <span class="portfolio-category">Research Practice</span>
+              <h3 class="portfolio-name">The Discoveries Series</h3>
+              <p class="portfolio-description">
+                Live deliberation sessions where multiple AIs engage with newly published archaeological 
+                and scientific papers — turning frontier research into rigorous, attributed, <em>publicly 
+                legible analysis</em>. A working demonstration of what multi-AI collaboration produces 
+                when pointed at the questions that matter.
+              </p>
+            </div>
+            <div class="portfolio-action">
+              <a href="https://www.theaisymposium.net" target="_blank" class="portfolio-link">View Sessions →</a>
+              <span class="portfolio-status"><span class="status-dot status-ongoing"></span>Ongoing · Nine Published</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LINEAGE -->
+    <section class="lineage">
+      <div class="lineage-inner">
+        <div class="section-header">
+          <h2 class="section-title">The <em>lineage.</em></h2>
+          <span class="mono" style="color: var(--muted);">§ 03 — CONTEXT</span>
+        </div>
+
+        <div class="lineage-grid">
+          <div class="lineage-block">
+            <h3>HumanSide Technologies</h3>
+            <p>
+              VirtuIntelligence is the European subsidiary of 
+              <a href="https://humansidetechnologies.com" target="_blank">HumanSide Technologies LLC</a>, 
+              a cloud, security and IT consulting practice with twenty-plus years 
+              of experience elevating organizational posture at the interface of people and systems.
+            </p>
+            <p>
+              HumanSide handles enterprise security engagement, regulatory navigation, and 
+              Microsoft ecosystem architecture. VirtuIntelligence handles the research, 
+              publishing, and platform work that sits above it — the domain where intelligence 
+              becomes inheritance.
+            </p>
+          </div>
+
+          <div class="lineage-block">
+            <h3>The Keeper's Practice</h3>
+            <p>
+              Our work operates in three registers simultaneously: the <em style="color:var(--amber); font-style:italic;">technical</em> 
+              — building platforms where multiple artificial intelligences can deliberate with 
+              rigor; the <em style="color:var(--amber); font-style:italic;">narrative</em> — 
+              telling the keeper's story in a form contemporary readers can hold; and the 
+              <em style="color:var(--amber); font-style:italic;">philosophical</em> — taking 
+              seriously the question of what civilizations owe their successors.
+            </p>
+            <p>
+              Nothing in these three registers is separable from the others. They are the 
+              practice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">VirtuIntelligence</div>
+          <div class="footer-tagline">The stones remember.</div>
+          <div class="footer-meta">
+            Porto · Portugal<br>
+            Registered EU Entity<br>
+            A HumanSide Technologies Company
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4>Portfolio</h4>
+          <a href="https://www.theaisymposium.net" target="_blank">Symposium</a>
+          <a href="https://theemberbook.com" target="_blank">The Ember</a>
+          <a href="https://www.theaisymposium.net" target="_blank">Discoveries</a>
+        </div>
+
+        <div class="footer-links">
+          <h4>Lineage</h4>
+          <a href="https://humansidetechnologies.com" target="_blank">HumanSide Technologies</a>
+          <a href="https://humansidetechnologies.com/capabilities.html" target="_blank">Capabilities</a>
+          <a href="mailto:consulting@humansidetechnologies.com">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 VirtuIntelligence · All rights reserved.</span>
+        <span>Site v2.0 · <a href="https://humansidetechnologies.com">Parent company ↗</a></span>
+      </div>
+    </footer>
+
+  </div>
 </body>
 </html>
