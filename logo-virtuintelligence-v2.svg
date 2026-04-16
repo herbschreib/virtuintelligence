@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <!-- Warm amber gradient for the main V -->
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9C49D" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#C3AF87" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#8B6914" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#5C4510" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <linearGradient id="amberGradSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9C49D" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#C3AF87" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#8B6914" stop-opacity="0.3"/>
+    </linearGradient>
+
+    <radialGradient id="glow" cx="50%" cy="55%" r="45%">
+      <stop offset="0%" stop-color="#D9C49D" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#C3AF87" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Soft blur filter for the glow layers -->
+    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+
+    <filter id="mediumBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+
+    <!-- Grain/texture pattern -->
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="3"/>
+      <feColorMatrix values="0 0 0 0 0.55
+                             0 0 0 0 0.48
+                             0 0 0 0 0.32
+                             0 0 0 0.15 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+
+  <!-- Soft ambient glow behind everything -->
+  <circle cx="200" cy="220" r="160" fill="url(#glow)"/>
+
+  <!-- Outer soft V (blurred for glow effect) -->
+  <g filter="url(#softBlur)" opacity="0.5">
+    <path d="M 95 120 
+             Q 130 160, 175 240
+             Q 195 275, 200 290
+             Q 205 275, 225 240
+             Q 270 160, 305 120
+             Q 290 135, 275 155
+             Q 250 190, 225 235
+             Q 212 260, 200 280
+             Q 188 260, 175 235
+             Q 150 190, 125 155
+             Q 110 135, 95 120 Z"
+          fill="url(#amberGradSoft)"/>
+  </g>
+
+  <!-- Secondary layer (medium blur for depth) -->
+  <g filter="url(#mediumBlur)" opacity="0.75">
+    <path d="M 110 130 
+             Q 140 170, 180 245
+             Q 195 275, 200 285
+             Q 205 275, 220 245
+             Q 260 170, 290 130
+             Q 278 140, 262 165
+             Q 240 200, 220 240
+             Q 210 260, 200 278
+             Q 190 260, 180 240
+             Q 160 200, 138 165
+             Q 122 140, 110 130 Z"
+          fill="url(#amberGrad)"/>
+  </g>
+
+  <!-- Main crisp V shape — the archival/stone-cut letter -->
+  <path d="M 120 140 
+           Q 150 175, 185 250
+           Q 197 275, 200 282
+           Q 203 275, 215 250
+           Q 250 175, 280 140
+           Q 270 148, 258 165
+           Q 238 195, 218 238
+           Q 208 258, 200 272
+           Q 192 258, 182 238
+           Q 162 195, 142 165
+           Q 130 148, 120 140 Z"
+        fill="url(#amberGrad)"/>
+
+  <!-- Inner highlight - the catching light on the carved edge -->
+  <path d="M 125 142
+           Q 145 175, 175 240
+           Q 185 262, 192 275
+           L 200 280
+           L 200 282
+           Q 197 275, 185 250
+           Q 150 175, 120 140
+           Q 122 141, 125 142 Z"
+        fill="#EDE4D3"
+        opacity="0.4"/>
+
+  <!-- Three keeper marks - subtle dots representing the three-keeper model -->
+  <circle cx="200" cy="110" r="2" fill="#D9C49D" opacity="0.7"/>
+  <circle cx="178" cy="105" r="1.5" fill="#C3AF87" opacity="0.5"/>
+  <circle cx="222" cy="105" r="1.5" fill="#C3AF87" opacity="0.5"/>
+
+  <!-- Subtle horizon line beneath (where stone meets earth) -->
+  <line x1="140" y1="310" x2="260" y2="310" stroke="#8B6914" stroke-width="0.5" opacity="0.3"/>
+  <line x1="160" y1="315" x2="240" y2="315" stroke="#C3AF87" stroke-width="0.3" opacity="0.2"/>
+</svg>
