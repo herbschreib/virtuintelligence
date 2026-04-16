@@ -46,7 +46,6 @@
       font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
     }
 
-    /* Paper grain texture */
     body::before {
       content: '';
       position: fixed;
@@ -73,7 +72,6 @@
       z-index: 3;
     }
 
-    /* Typography */
     .display {
       font-family: 'Fraunces', Georgia, serif;
       font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
@@ -114,6 +112,15 @@
       letter-spacing: -0.01em;
       color: var(--ivory);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-brand-mark {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
     }
 
     .nav-brand span {
@@ -150,25 +157,49 @@
       width: 100%;
     }
 
+    .hero-logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .hero-logo {
+      width: 180px;
+      height: 180px;
+      filter: drop-shadow(0 0 60px rgba(195, 175, 135, 0.15));
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .hero-logo:hover {
+      transform: scale(1.03);
+      filter: drop-shadow(0 0 80px rgba(195, 175, 135, 0.25));
+    }
+
     .hero-label {
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.75rem;
       margin-bottom: 2.5rem;
       color: var(--amber);
+      text-align: center;
     }
 
-    .hero-label::before {
+    .hero-label::before,
+    .hero-label::after {
       content: '';
       width: 2rem;
       height: 1px;
       background: var(--amber);
+      opacity: 0.6;
     }
 
     .hero-title {
       font-size: clamp(3.5rem, 9vw, 8rem);
       margin-bottom: 2rem;
       color: var(--ivory);
+      text-align: center;
     }
 
     .hero-title .emphasis {
@@ -187,16 +218,19 @@
       color: var(--ivory-dim);
       max-width: 48rem;
       line-height: 1.4;
-      margin-bottom: 3rem;
+      margin: 0 auto 3rem;
+      text-align: center;
     }
 
     .hero-meta {
       display: flex;
       gap: 3rem;
       flex-wrap: wrap;
+      justify-content: center;
       padding-top: 2rem;
       border-top: 1px solid var(--hairline);
       max-width: 48rem;
+      margin: 0 auto;
     }
 
     .hero-meta-item {
@@ -512,6 +546,13 @@
       align-items: start;
     }
 
+    .footer-mark {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
     .footer-brand {
       font-family: 'Fraunces', serif;
       font-variation-settings: "opsz" 48;
@@ -591,7 +632,6 @@
       color: var(--amber);
     }
 
-    /* Load animations */
     @keyframes reveal {
       from {
         opacity: 0;
@@ -603,13 +643,18 @@
       }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
     .reveal {
       animation: reveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .hero-logo-animated {
+      animation: reveal 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) both, 
+                 gentleFloat 8s ease-in-out infinite 2s;
     }
 
     .reveal-1 { animation-delay: 0.1s; }
@@ -618,12 +663,14 @@
     .reveal-4 { animation-delay: 0.7s; }
     .reveal-5 { animation-delay: 0.9s; }
 
-    /* Responsive */
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .hero { padding: 6rem 1.5rem 3rem; }
       .manifesto, .portfolio, .lineage { padding: 5rem 1.5rem; }
       footer { padding: 3rem 1.5rem 2rem; }
+      
+      .hero-logo { width: 140px; height: 140px; }
+      .hero-logo-wrap { margin-bottom: 2.5rem; }
       
       .manifesto-inner { grid-template-columns: 1fr; gap: 2rem; }
       .manifesto-label { position: static; }
@@ -647,24 +694,88 @@
   </style>
 </head>
 <body>
+
+  <!-- Reusable SVG logo symbol -->
+  <svg width="0" height="0" style="position: absolute;">
+    <defs>
+      <symbol id="vi-logo" viewBox="0 0 400 400">
+        <defs>
+          <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#D9C49D" stop-opacity="0.95"/>
+            <stop offset="45%" stop-color="#C3AF87" stop-opacity="1"/>
+            <stop offset="80%" stop-color="#8B6914" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#5C4510" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="amberGradSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#D9C49D" stop-opacity="0.4"/>
+            <stop offset="50%" stop-color="#C3AF87" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#8B6914" stop-opacity="0.3"/>
+          </linearGradient>
+          <radialGradient id="glowRad" cx="50%" cy="55%" r="45%">
+            <stop offset="0%" stop-color="#D9C49D" stop-opacity="0.25"/>
+            <stop offset="50%" stop-color="#C3AF87" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="softBlurFilter" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="8"/>
+          </filter>
+          <filter id="mediumBlurFilter" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3"/>
+          </filter>
+        </defs>
+
+        <circle cx="200" cy="220" r="160" fill="url(#glowRad)"/>
+
+        <g filter="url(#softBlurFilter)" opacity="0.5">
+          <path d="M 95 120 Q 130 160, 175 240 Q 195 275, 200 290 Q 205 275, 225 240 Q 270 160, 305 120 Q 290 135, 275 155 Q 250 190, 225 235 Q 212 260, 200 280 Q 188 260, 175 235 Q 150 190, 125 155 Q 110 135, 95 120 Z"
+                fill="url(#amberGradSoft)"/>
+        </g>
+
+        <g filter="url(#mediumBlurFilter)" opacity="0.75">
+          <path d="M 110 130 Q 140 170, 180 245 Q 195 275, 200 285 Q 205 275, 220 245 Q 260 170, 290 130 Q 278 140, 262 165 Q 240 200, 220 240 Q 210 260, 200 278 Q 190 260, 180 240 Q 160 200, 138 165 Q 122 140, 110 130 Z"
+                fill="url(#amberGrad)"/>
+        </g>
+
+        <path d="M 120 140 Q 150 175, 185 250 Q 197 275, 200 282 Q 203 275, 215 250 Q 250 175, 280 140 Q 270 148, 258 165 Q 238 195, 218 238 Q 208 258, 200 272 Q 192 258, 182 238 Q 162 195, 142 165 Q 130 148, 120 140 Z"
+              fill="url(#amberGrad)"/>
+
+        <path d="M 125 142 Q 145 175, 175 240 Q 185 262, 192 275 L 200 280 L 200 282 Q 197 275, 185 250 Q 150 175, 120 140 Q 122 141, 125 142 Z"
+              fill="#EDE4D3" opacity="0.4"/>
+
+        <circle cx="200" cy="110" r="2" fill="#D9C49D" opacity="0.7"/>
+        <circle cx="178" cy="105" r="1.5" fill="#C3AF87" opacity="0.5"/>
+        <circle cx="222" cy="105" r="1.5" fill="#C3AF87" opacity="0.5"/>
+
+        <line x1="140" y1="310" x2="260" y2="310" stroke="#8B6914" stroke-width="0.5" opacity="0.3"/>
+        <line x1="160" y1="315" x2="240" y2="315" stroke="#C3AF87" stroke-width="0.3" opacity="0.2"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <div class="container">
     
-    <!-- NAVIGATION -->
     <nav>
-      <a href="/" class="nav-brand">Virtu<span>Intelligence</span></a>
+      <a href="/" class="nav-brand">
+        <svg class="nav-brand-mark"><use href="#vi-logo"/></svg>
+        Virtu<span>Intelligence</span>
+      </a>
       <a href="https://humansidetechnologies.com" class="nav-parent" target="_blank">HumanSide Technologies ↗</a>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
       <div class="hero-inner">
+        
+        <div class="hero-logo-wrap reveal hero-logo-animated">
+          <svg class="hero-logo"><use href="#vi-logo"/></svg>
+        </div>
+
         <div class="hero-label mono reveal reveal-1">
           EU SUBSIDIARY · HOLDING COMPANY · EST. 2025
         </div>
         
         <h1 class="display hero-title reveal reveal-2">
-          Keepers of<br>
-          <span class="emphasis">intelligence.</span>
+          Keepers of <span class="emphasis">intelligence.</span>
         </h1>
         
         <p class="hero-subtitle reveal reveal-3">
@@ -836,6 +947,7 @@
     <footer>
       <div class="footer-inner">
         <div>
+          <svg class="footer-mark"><use href="#vi-logo"/></svg>
           <div class="footer-brand">VirtuIntelligence</div>
           <div class="footer-tagline">The stones remember.</div>
           <div class="footer-meta">
